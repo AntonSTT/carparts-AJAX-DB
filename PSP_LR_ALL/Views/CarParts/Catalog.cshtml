@@ -1,0 +1,107 @@
+﻿@model IEnumerable<PSP_LR_ALL.Models.CarPart>
+
+
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AutoParts - Каталог</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <script src="~/js/catalog_checkthings.js"></script>
+</head>
+<body>
+    <!-- верхний колонтитул -->
+    <header class="header">
+        <nav class="header-left">
+            <a href="/Home/Index">
+                <img src="/img/service.png" alt="Логотип AutoParts" class="logo" />
+            </a>
+            <a href="/Home/Index" class="header-text">AutoParts</a>
+        </nav>
+        <div class="header-midsection">
+            <div class="search-container">
+                <input type="text"
+                       id="searchInput"
+                       placeholder="Поиск по названию"
+                       class="search-input" 
+                       autocomplete="off" />
+                <div id="suggestions" class="suggestions-container"></div>
+            </div>
+            <a class="search-button" id="searchButton">Поиск</a>
+            <a href="/CarParts/Catalog" class="search-button">Весь каталог</a>
+        </div>
+        <div class="header-right">
+            <a href="/Cart/All" class="search-button">Корзина</a>
+        </div>
+    </header>
+    <!-- основная часть документа -->
+    <main class="catalog">
+        <h1 class="catalog-title">Каталог автозапчастей</h1>
+        <div class="catalog-content">
+            <aside class="filters">
+                <div class="filter-section">
+                    <p class="filter-text">Категории</p>
+                    @foreach(var category in ViewBag.Category)
+                    {
+                        <label>
+                            <input type = "checkbox" value="@category.Value" class="category-filter"/> @category.Text
+                        </label>
+
+                        <br />
+                    }
+                    
+                    
+                </div>
+                <div class="filter-section">
+                    <p class="filter-text">Цена</p>
+                    <div>
+                        <label for="price-from">Минимальная:</label>
+                        <input type="number" id="price-from" class="price-set" placeholder="Мин. цена" min="0" />
+                    </div>
+                    <div>
+                        <label for="price-to">Максимальная:</label>
+                        <input type="number" id="price-to" class="price-set" placeholder="Макс. цена" min="0" />
+                    </div>
+
+
+                </div>
+                <div class="filter-section">
+                    
+                    <button class="search-button" id="filterclear">Снять фильтры</button>
+
+                </div>
+
+            </aside>
+
+            <!-- Карточки товаров -->
+            <div class="products">
+                
+                
+                @await Html.PartialAsync("_CarPartsListPartial",Model)
+                
+                <a href="/CarParts/AddItem" class="category add-option">
+                    <img src="/img/Plus-Symbol-Silhouette-PNG-Images-HD.png" alt="ДобавитьНовый" />
+                    <p><strong>Добавить новый</strong></p>
+                </a>
+            </div>
+            
+            
+        </div>
+        <div id="loadingIndicator" style="display: none; text-align: center; padding: 20px;">
+            Загрузка...
+        </div>
+    </main>
+    <!-- нижний колонтитул -->
+    <footer class="footer">
+        <div class="footer-left">
+            <ul>
+                <li><a href="/Home/Company">Компания</a></li>
+                <li><p>(c) 2024. Интернет-магазин автозапчастей "AutoParts"</p></li>
+            </ul>
+        </div>
+    </footer>
+   
+</body>
+</html>

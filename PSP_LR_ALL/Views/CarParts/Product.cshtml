@@ -1,0 +1,117 @@
+﻿@model CarPart
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AutoParts - @Model.Name</title>
+    <script src="~/js/zoom_image.js"></script>
+    <script src="~/js/category_cart.js"></script>
+    <link rel="stylesheet" href="~/css/styles.css" />
+</head>
+<body>
+    <!-- верхний колонтитул -->
+    <header class="header">
+        <nav class="header-left">
+            <a href="/">
+                <img src="~/img/service.png" alt="Логотип AutoParts" class="logo" />
+            </a>
+            <a href="/" class="header-text">AutoParts</a>
+        </nav>
+        <div class="header-midsection">
+            <a href="/CarParts/Catalog" class="search-button">Весь каталог</a>
+        </div>
+        <div class="header-right">
+            <a href="/Cart/All" class="search-button">Корзина</a>
+        </div>
+    </header>
+
+    <main class="product-page">
+        <div id="modal">
+            <img id="img01" src="data:image/jpeg;base64,@Model.Image" alt="@Model.Name приближено">
+        </div>
+
+        <h1 class="product-header">@Model.Name</h1>
+
+        <div class="product-content">
+            <div class="product-images">
+                <div class="main-image">
+                    <img src="data:image/jpeg;base64,@Model.Image" alt="@Model.Name главное изображение" id="main-image" onclick="zoomImage(this)" />
+                </div>
+            </div>
+
+            <div class="product-details">
+                <table class="specs-table">
+                    <tr>
+                        <td>Производитель:</td>
+                        <td>@Model.Manufacturer</td>
+                    </tr>
+                    <tr>
+                        <td>Название:</td>
+                        <td>@Model.Name</td>
+                    </tr>
+                    <tr>
+                        <td>Тип детали:</td>
+                        <td>@Model.Type</td>
+                    </tr>
+                    <tr>
+                        <td>Категория детали:</td>
+                        <td>@Model.Category?.Name</td>
+                    </tr>
+                    <tr>
+                        <td>Номер детали:</td>
+                        <td>@Model.Number</td>
+                    </tr>
+                    <tr>
+                        <td>Подходит к:</td>
+                        <td>@Model.Compatibility</td>
+                    </tr>
+                </table>
+                <p class="product-price"><strong>Цена: @Model.Price.ToString("N0") ₽</strong></p>
+            </div>
+        </div>
+
+        <div class="product-description">
+            <h2>Описание @Model.Name</h2>
+            <p>@Model.Description</p>
+            <div id="cartButtonContainer" data-part-id="@Model.Id" data-quant="@ViewBag.Quant">
+                @if (ViewBag.IsInCart)
+                {
+                    <div class="cart-quantity-controls">
+                        <p class="cart-notice">Предмет уже в корзине</p>
+                        <p class="cart-notice"> Количество:</p>
+                        <div class="quantity-control-group">
+                            <button class="quantity-btn" id="less-quant">-</button>
+                            <input type="number"
+                                   class="quantity-input"
+                                   value=@ViewBag.Quant
+                                   min="1"
+                                   max="20"
+                                   step="1">
+                            <button class="quantity-btn" id="more-quant">+</button>
+                        </div>
+                        <button class="btn" id="remove">Удалить из корзины</button>
+                    </div>
+
+                }
+                else
+                {
+                    <button class="btn" id="add">Добавить в корзину</button>
+                }
+            </div>
+            
+        </div>
+    </main>
+
+    <!-- нижний колонтитул -->
+    <footer class="footer">
+        <div class="footer-left">
+            <ul>
+                <li><a href="/Home/Company">Компания</a></li>
+                <li><p>(c) 2024 Интернет-магазин автозапчастей "AutoParts"</p></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

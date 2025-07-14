@@ -1,0 +1,63 @@
+﻿
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AutoParts - Главная</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+    <!-- верхний колонтитул -->
+    <header class="header">
+        <nav class="header-left">
+            <a href="/Home/Index">
+                <img src="/img/service.png" alt="Логотип AutoParts" class="logo" />
+            </a>
+            <a href="/Home/Index" class="header-text">AutoParts</a>
+        </nav>
+        <div class="header-midsection">
+            <a href="/CarParts/Catalog" class="search-button">Весь каталог</a>
+        </div>
+        <div class="header-right">
+            <a href="/Cart/All" class="search-button">Корзина</a>
+        </div>
+    </header>
+    <!-- основное содержимое документа -->
+    <main>
+        <h1>Интернет-магазин автозапчастей AutoParts</h1>
+        <p class="sale-categories">
+            Интернет-магазин AutoParts предоставляет большой выбор запчастей, разделённых
+            по четырём основным категориям.
+        </p>
+        <div class="sale-categories">
+            <p class="catitle"><strong>Категории товаров</strong></p>
+            <div class="latest-items">
+                <a href="/CarParts/Catalog?categoryId=1" class="category">
+                    <img src="/img/battery.png" alt="Запчасти для техобслуживания" />
+                    <p><strong>Запчасти для техобслуживания</strong></p>
+                </a>
+                <a href="/CarParts/Catalog?categoryId=2" class="category">
+                    <img src="/img/spare-parts_4881142.png" alt="Запчасти для ремонта" />
+                    <p><strong>Запчасти для ремонта</strong></p>
+                </a>
+                <a href="/CarParts/Catalog?categoryId=3" class="category">
+                    <img src="/img/_14947087.png" alt="Технические жидкости" />
+                    <p><strong>Технические жидкости</strong></p>
+                </a>
+                <a href="/CarParts/Catalog?categoryId=4" class="category">
+                    <img src="/img/belt_3389709.png" alt="Аксессуары" />
+                    <p><strong>Аксессуары</strong></p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- нижний колонтитул -->
+    <footer class="footer">
+        <div class="footer-left">
+            <ul>
+                <li><a href="/Home/Company">Компания</a></li>
+                <li><p>(c) 2024. Интернет-магазин автозапчастей "AutoParts"</p></li>
+            </ul>
+        </div>
+    </footer>
+</body>

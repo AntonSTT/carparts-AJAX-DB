@@ -1,0 +1,26 @@
+﻿@model IEnumerable<PSP_LR_ALL.Models.CarPart>
+
+@if (Model != null && Model.Any())
+{
+	@foreach(var carpart in Model)
+	{
+        <a href="@Url.Action("Product", "Carparts", new { id = carpart.Id })" class="category" data-category="@carpart.Category.Name" data-page ="@ViewBag.CurrentPage">
+            @if (!string.IsNullOrEmpty(carpart.Image))
+            {
+                <img src="data:image/jpeg;base64,@carpart.Image" alt="@carpart.Name" loading="lazy" />
+            }
+            else
+            {
+                <img src="@Url.Content("~/img/Mann-Filter-WK-69-2.png")" alt="Нет изображения" />
+            }
+            <div class="category-text">
+                <p><strong>@carpart.Name</strong></p>
+                <p>Категория: @carpart.Category.Name</p>
+                <p>Цена: @carpart.Price.ToString("N0") ₽</p>
+            </div>
+        </a>
+	}
+    
+}
+
+

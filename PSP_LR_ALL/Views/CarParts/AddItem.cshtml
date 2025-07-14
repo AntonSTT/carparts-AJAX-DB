@@ -1,0 +1,153 @@
+﻿@model CarPart
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AutoParts - Регистрация</title>
+    <link rel="stylesheet" href="~/css/styles.css" />
+    <script src="~/js/validation.js" defer></script>
+</head>
+<body>
+    <!-- верхний колонтитул -->
+    <header class="header">
+        <nav class="header-left">
+            <a href="/Home/Index">
+                <img src="/img/service.png" alt="Логотип AutoParts" class="logo" />
+            </a>
+            <a href="/Home/Index" class="header-text">AutoParts</a>
+        </nav>
+        <div class="header-midsection">
+        
+            <a href="/CarParts/Catalog" class="search-button">Весь каталог</a>
+        </div>
+        <div class="header-right">
+            <a href="/Cart/All" class="search-button">Корзина</a>
+        </div>
+    </header>
+    <main class="auth-container">
+        <section>
+            <h1>Добавление новой детали в интернет-магазин AutoParts</h1>
+            <form asp-action="AddItem"
+                  asp-controller="CarParts"
+                  method="post"
+                  id="register-form" class="auth-form">
+                
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <label asp-for="Name">Название</label>
+                    <input asp-for = "Name"
+                           id="Name"
+                           type="text"
+                           minlength="2"
+                           maxlength="64"
+                           required
+                           placeholder="Название (2-64 символа)" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <p class="error-message">Поле должно содержать от 2 до 64 символов</p>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Manufacturer">Производитель</label>
+                    <input asp-for="Manufacturer"
+                           id="Manufacturer"
+                           type="text"
+                           minlength="2"
+                           maxlength="64"
+                           required
+                           placeholder="Производитель(2-64 символа)" />
+                    <span asp-validation-for="Manufacturer" class="text-danger"></span>
+                    <p class="error-message">Поле должно содержать от 2 до 64 символов, содержать кириллицу или латиницу без специальных символов</p>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CatKey">Категория товара</label>
+                    <select asp-for="CatKey" asp-items="ViewBag.Categories" id="category-select" required>
+                        <option value="" selected disaled hidden>--Выберите категорию--</option>
+                    </select>
+                    <span asp-validation-for="CatKey" class="text-danger"></span>
+                    <p class="error-message">Необходимо выбрать категорию</p>
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="Type">Тип детали</label>
+                    <input asp-for="Type"
+                           id="Type"
+                           type="text"
+                           minlength="2"
+                           maxlength="64"
+                           placeholder="Тип детали (2-64 символа)" />
+                    <span asp-validation-for="Type" class="text-danger"></span>
+                    <p class="error-message">Поле должно содержать от 2 до 64 символов и содержать только кириллицу, возможны пробелы и тире</p>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Number">Серийный номер детали</label>
+                    <input asp-for="Number"
+                           id="Number"
+                           type="text"
+                           minlength="2"
+                           maxlength="64"
+                           placeholder="Серийный номер детали (2-64 символа)" />
+                    <span asp-validation-for="Number" class="text-danger"></span>
+                    <p class="error-message">Поле должно содержать от 2 до 64 символов и состоять только из букв латиницы и цифр</p>
+                </div>
+                
+                <div class="form-group">
+                    <label asp-for="Compatibility">Совместимость детали</label>
+                    <input asp-for="Compatibility"
+                           type="text"
+                           id = "Compatibility"
+                           minlength="2"
+                           maxlength="64"
+                           placeholder="Совместимость детали (2-64 символа)" />
+                    <span asp-validation-for="Compatibility" class="text-danger"></span>
+                    <p class="error-message">Поле должно содержать от 2 до 64 символов</p>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Image">Изображение детали</label>
+                    <input type="file" id="imageFile"/>
+                    <input type="hidden" asp-for="Image" id="ImageField" accept="image/*" />
+                    <span asp-validation-for="Image" class="text-danger"></span>
+                    <p class="error-message">Должно быть загружено изображение</p>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Description">Описание</label>
+                        <textarea asp-for="Description"
+                           id="Description"
+                           minlength="8"
+                           maxlength="1024"
+                           placeholder="Описание детали (8-1024 символа)"
+                           rows="5"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                    <p class="error-message">Описание должно содержать 8-1024 символов</p>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Price">Стоимость детали</label>
+                    <input asp-for="Price" type="number" min="0" step="1"/>
+                    
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                    <p class="error-message">Должна быть введена цена, только числа не начинающиеся с нуля</p>
+                </div>
+                
+
+                <button type="submit">
+                    Добавить
+                </button>
+            </form>
+        </section>
+    </main>
+    <!-- нижний колонтитул -->
+    <footer class="footer">
+        <nav class="footer-left">
+            <ul>
+                <li><a href="/Home/Company">Компания</a></li>
+                <li><p>(c) 2024. Интернет-магазин автозапчастей "AutoParts"</p></li>
+            </ul>
+        </nav>
+    </footer>
+</body>
+</html>

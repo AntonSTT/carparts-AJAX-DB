@@ -1,0 +1,88 @@
+﻿@model Cart
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AutoParts - Корзина</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <script src="~/js/cartscripts.js"></script>
+</head>
+<body>
+    <!-- верхний колонтитул -->
+    <header class="header">
+        <nav class="header-left">
+            <a href="/Home/Index">
+                <img src="/img/service.png" alt="Логотип AutoParts" class="logo" />
+            </a>
+            <a href="/Home/Index" class="header-text">AutoParts</a>
+        </nav>
+        <div class="header-midsection">
+            <a href="/CarParts/Catalog" class="search-button">Весь каталог</a>
+        </div>
+        <div class="header-right">
+            <a href="/Cart/All" class="search-button">Корзина</a>
+        </div>
+    </header>
+
+    <!-- основное содержимое документа -->
+    <main>
+        <div class="cart-container">
+            <h1 class="cart-title">Ваша корзина</h1>
+
+            <div class="cart-items">
+                @if (Model.CartParts?.Any() == true)
+                {
+                    @foreach (var cartPart in Model.CartParts)
+                    {
+                        <div class="cart-item" data-part-id="@cartPart.CarPartID">
+                            <a href="/CarParts/Product/@cartPart.CarPartID">
+                                <img src="data:image/jpeg;base64,@cartPart.carPart.Image" alt="@cartPart.carPart.Name" class="cart-item-image">
+                            </a>
+                            <div class="cart-item-details">
+                                <a href="/CarParts/Product/@cartPart.CarPartID" class="cart-item-name">@cartPart.carPart.Name</a>
+                                <div class="cart-item-price">@cartPart.carPart.Price.ToString("N0") ₽</div>
+                            </div>
+                            <div class="cart-item-quantity">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <input type="number"
+                                       class="quantity-input"
+                                       value="@cartPart.Quantity"
+                                       min="1"
+                                       max="20"
+                                       step="1">
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="cart-item-remove">×</button>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="empty-cart">Ваша корзина пуста</div>
+                }
+            </div>
+
+            <div class="cart-summary">
+                @if (Model.CartParts?.Any() ?? false == true)
+                {
+                    <div class="total-price">Итого: @(Model.CartParts.Sum(cp => cp.carPart.Price * cp.Quantity).ToString("N0")) ₽</div>
+                    <button class="search-button">Оформить заказ</button>
+                }
+                else
+                {
+                    <a class="search-button" href="/CarParts/Catalog">К каталогу</a>
+                }
+
+            </div>
+        </div>
+    </main>
+
+    <!-- нижний колонтитул -->
+    <footer class="footer">
+        <div class="footer-left">
+            <ul>
+                <li><a href="/Home/Company">Компания</a></li>
+                <li><p>(c) 2024. Интернет-магазин автозапчастей "AutoParts"</p></li>
+            </ul>
+        </div>
+    </footer>
+</body>
