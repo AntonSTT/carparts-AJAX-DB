@@ -4,7 +4,7 @@
 С помощью AJAX реализована пагинация при достижении конца страницы, динамическая фильтрация по цене и категориям, поиск вхождений по названию с учётом фильтров, добавление в корзину и изменение количества товара в корзине.
 Присутствует также регистрация в системе, добавление товаров.
 
-#Примеры работы
+# Примеры работы
 <img width="1920" height="931" alt="главная" src="https://github.com/user-attachments/assets/ed77dcaf-561c-4b65-9cbf-706b22e3dda7" />
 <img width="1889" height="932" alt="каталог" src="https://github.com/user-attachments/assets/4fb8a794-e17a-477c-b01d-d4e82ebbba57" />
 <img width="1894" height="211" alt="поиск" src="https://github.com/user-attachments/assets/884d1d1c-5023-4dad-a709-46f79d1b9b29" />
